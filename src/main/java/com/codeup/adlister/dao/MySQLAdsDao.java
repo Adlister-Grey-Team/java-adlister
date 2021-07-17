@@ -29,6 +29,7 @@ public class MySQLAdsDao implements Ads {
     @Override
     public List<Ad> all() {
         PreparedStatement stmt = null;
+        PreparedStatement statement = null;
         try {
             stmt = connection.prepareStatement("SELECT * FROM ads");
             ResultSet rs = stmt.executeQuery();
