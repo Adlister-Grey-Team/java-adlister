@@ -19,6 +19,24 @@
                 <input type="text" id="search" name="search">
                 <input type="submit" value="Search Ads">
             </form>
+            <form action="#" method="post">
+                <label for="selector">Categories</label>
+                <select name="category" id="selector">
+                    <option value="0">--Choose Category--</option>
+                    <option value="1">Automotive</option>
+                    <option value="2">Beauty and Health</option>
+                    <option value="3">Books</option>
+                    <option value="4">Clothing</option>
+                    <option value="5">Computers</option>
+                    <option value="6">Electronic</option>
+                    <option value="7">Home and Garden</option>
+                    <option value="8">Movies, Music, Games</option>
+                    <option value="9">Outdoors</option>
+                    <option value="10">Pets</option>
+                    <option value="11">Sports</option>
+                </select>
+                <button type="submit">Search</button>
+            </form>
         </div>
         <ul class="nav navbar-nav navbar-right">
             <c:choose>
