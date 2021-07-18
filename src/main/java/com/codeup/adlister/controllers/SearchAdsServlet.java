@@ -16,8 +16,11 @@ public class SearchAdsServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+        //////////////////// *** NOTE *** /////////////////////////
+        // This code works but creates an error with the normal search ads function.
+        // So either this works or the search function works
+        // Need to debug to make both work together
 
-        // This code works but creates an error with the normal search ads function. Need to debug
 //        String dropDownVal = request.getParameter("category");
 //        System.out.println(dropDownVal);
 //        long selectVaL = Long.parseLong(dropDownVal);
