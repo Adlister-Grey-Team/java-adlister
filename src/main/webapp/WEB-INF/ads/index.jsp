@@ -10,7 +10,7 @@
 <jsp:include page="/WEB-INF/partials/navbar.jsp"/>
 
 <div class="container">
-    <h1 class="text-center title">Advertisements git add<a href="/ads/create">
+    <h1 class="text-center title">Advertisements<a href="/ads/create">
         <button id="create"></button>
     </a></h1>
     </h1>
