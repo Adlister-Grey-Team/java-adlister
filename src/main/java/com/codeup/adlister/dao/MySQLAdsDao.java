@@ -99,4 +99,15 @@ public class MySQLAdsDao implements Ads {
             throw new RuntimeException("Error retrieving all ads.", e);
         }
     }
+    public List<Ad> listAdsByCatId(long catId) {
+        String query = "SELECT * FROM ads WHERE id IN (SELECT ad_id FROM ad_cat WHERE cat_id = ?);";
+        try {
+            PreparedStatement stmt = connection.prepareStatement(query);
+            stmt.setLong(1, catId);
+            ResultSet rs = stmt.executeQuery();
+            return createAdsFromResults(rs);
+        } catch (SQLException e) {
+            throw new RuntimeException("Error listing ads by category.", e);
+        }
+    }
 }
