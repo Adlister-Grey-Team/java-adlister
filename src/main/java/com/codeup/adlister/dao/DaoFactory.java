@@ -22,7 +22,7 @@ public class DaoFactory {
     }
     public static Categories getCatDao(){
         if (categoryDao == null){
-            categoryDao = new CategoryDao(config);
+            categoryDao = new MySQLCategoriesDao(config);
         }
         return categoryDao;
     }
