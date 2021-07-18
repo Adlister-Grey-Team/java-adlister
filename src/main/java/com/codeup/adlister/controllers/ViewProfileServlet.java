@@ -22,4 +22,10 @@ public class ViewProfileServlet extends HttpServlet {
         request.setAttribute("ads", DaoFactory.getAdsDao().displayAdsFromUserId(loggedInUser.getId()));
         request.getRequestDispatcher("/WEB-INF/profile.jsp").forward(request, response);
     }
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        Long adIdNum = Long.parseLong(req.getParameter("deleteAd"));
+        DaoFactory.getAdsDao().deleteAdByAdId(adIdNum);
+        resp.sendRedirect("/profile");
+    }
 }
