@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(name = "controllers/CategoriesServlet.java", urlPatterns = "/ads")
+@WebServlet(name = "controllers/CategoriesServlet.java", urlPatterns = "/category")
 public class CategoriesServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setAttribute("cats", DaoFactory.getCatDao().printCategories(18L));
