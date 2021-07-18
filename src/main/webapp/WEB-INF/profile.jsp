@@ -19,8 +19,8 @@
             <div class="col-md-5">
                 <h2>${ad.title}</h2>
                 <p>${ad.description}</p>
-                <form action="profile" method="post">
-                    <button type="submit" name="deleteUpdate" value="delete-${ad.id}">Delete</button>
+                <form action="/profile" method="post">
+                    <button type="submit" name="deleteAd" value="${ad.id}">Delete</button>
                     <button type="submit" name="deleteUpdate" value="update">Update</button>
                 </form>
             </div>

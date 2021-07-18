@@ -19,4 +19,6 @@ public interface Ads {
     List<Ad> searchForAds(String searchForAd);
 
     List<Ad> listAdsByCatId(long catId);
+
+    void deleteAdByAdId(long id);
 }
