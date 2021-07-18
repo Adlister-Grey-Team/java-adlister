@@ -63,7 +63,7 @@ public class VerifyData {
         String userEmailExistsMessage = "An user with this email already exists, please try again.";
         String userPasswordsDoNotMatchMessage = "Password does not match, please enter matching confirmation password";
         String invalidEmailMessage = email + " is not a valid email, please enter a valid email";
-        String invalidUserNameMessage = "Invalid username, usernames may only contain letters, numbers and underscores.";
+        String invalidUserNameMessage = "Invalid username, may contain A-z 0-9 and underscores only. Must be 5 to 30 characters.";
         String alert = " <span style=\"color:red\">*</span>";
 
         if (!isValidEmail || !userEmailNotExist || !isValidUserName || !userNameNotExist) {
@@ -96,10 +96,43 @@ public class VerifyData {
             request.setAttribute("noPasswordMatchAlert", alert);
             request.setAttribute("usersInputUsername", username);
             request.setAttribute("usersInputEmail", email);
-            request.getRequestDispatcher("/WEB-INF/register.jsp").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/"+ jsp +".jsp").forward(request, response);
             return false;
         }
 
+        return true;
+    }
+
+    public static boolean checkUserInputAndGenerateErrorMessages(HttpServletRequest request, HttpServletResponse response, String email, String password, String passwordConfirmation, String jsp) throws ServletException, IOException {
+        boolean userEmailNotExist = VerifyData.userEmailNotExist(email);
+
+        boolean isValidEmail = VerifyData.isValidEmail(email);
+
+        String userEmailExistsMessage = "An user with this email already exists, please try again.";
+        String userPasswordsDoNotMatchMessage = "Password does not match, please enter matching confirmation password";
+        String invalidEmailMessage = email + " is not a valid email, please enter a valid email";
+        String alert = " <span style=\"color:red\">*</span>";
+
+        if (!isValidEmail || !userEmailNotExist) {
+            if (!isValidEmail) {
+                request.setAttribute("userEmailExistsHTML", alert);
+                request.setAttribute("invalidEmailMessage", invalidEmailMessage);
+            }
+            if (!userEmailNotExist && isValidEmail) {
+                request.setAttribute("userEmailExistsMessage", userEmailExistsMessage);
+                request.setAttribute("userEmailExistsHTML", alert);
+            }
+            request.getRequestDispatcher("/WEB-INF/" + jsp + ".jsp").forward(request, response);
+            return false;
+        }
+
+        if (!password.equals(passwordConfirmation)) {
+            request.setAttribute("noPasswordMatchMessage", userPasswordsDoNotMatchMessage);
+            request.setAttribute("noPasswordMatchAlert", alert);
+            request.setAttribute("usersInputEmail", email);
+            request.getRequestDispatcher("/WEB-INF/"+ jsp +".jsp").forward(request, response);
+            return false;
+        }
         return true;
     }
 }

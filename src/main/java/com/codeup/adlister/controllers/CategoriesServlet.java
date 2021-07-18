@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+
 @WebServlet(name = "controllers/CategoriesServlet.java", urlPatterns = "/category")
 public class CategoriesServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -16,3 +17,4 @@ public class CategoriesServlet extends HttpServlet {
         request.getRequestDispatcher("/WEB-INF/ads/index.jsp").forward(request, response);
     }
 }
+

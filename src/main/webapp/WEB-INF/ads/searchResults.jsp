@@ -10,13 +10,19 @@
 <jsp:include page="/WEB-INF/partials/navbar.jsp" />
 
 <div class="container">
-    <h1>${result}"${search}"</h1>
+    <h1><c:out value="${result}\"${search}\"" /></h1>
     <c:forEach var="ad" items="${ads}">
         <div class="col-md-6">
-            <h2>${ad.title}</h2>
-            <p>${ad.description}</p>
+            <h2><c:out value="${ad.title}" /></h2>
+            <p><c:out value="${ad.description}" /></p>
+            <c:forEach var="cat" items="${cats}">
+                <c:if test="${ad.id==cat.ad_id}">
+                    <p>${cat.category}</p>
+                </c:if>
+            </c:forEach>
         </div>
     </c:forEach>
+
 
 </div>
 
