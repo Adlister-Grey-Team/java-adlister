@@ -16,9 +16,13 @@
         <h1>Here are your current ad listings!</h1>
 
         <c:forEach var="ad" items="${ads}">
-            <div class="col-md-6">
+            <div class="col-md-5">
                 <h2>${ad.title}</h2>
                 <p>${ad.description}</p>
+                <form action="profile" method="post">
+                    <button type="submit" name="deleteUpdate" value="delete-${ad.id}">Delete</button>
+                    <button type="submit" name="deleteUpdate" value="update">Update</button>
+                </form>
             </div>
         </c:forEach>
     </div>
