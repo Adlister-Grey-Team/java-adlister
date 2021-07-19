@@ -11,17 +11,19 @@
 
 <div class="container">
     <h1 class="text-center title">Advertisement Details</h1>
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <h3 class="panel-title"><c:out value="${ad.title} - ${ad.user.username}" />
-                <p>Category Type:  <em><c:out value="${ad.category.classification}"/></em></p></h3>
-        </div>
-        <div class="panel-body">
-            <p><c:out value="${ad.description}" /></p>
-            <p> - <c:out value="${ad.user.firstname}"/></p>
-        </div>
-    </div>
 
+    <div class="col-md-6">
+        <h2><c:out value="${ad.title}" /></h2>
+        <p><c:out value="${ad.description}" /></p>
+        <c:forEach var="cat" items="${cats}">
+            <c:if test="${ad.id==cat.ad_id}">
+                <p>${cat.category}</p>
+            </c:if>
+        </c:forEach>
+        <form action="/ads" method="get">
+            <input type="submit" name="viewad" value="Back to Ads">
+        </form>
+    </div>
 </div>
 </body>
 </html>

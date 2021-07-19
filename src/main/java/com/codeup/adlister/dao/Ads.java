@@ -22,7 +22,7 @@ public interface Ads {
 
     void deleteAdByAdId(long id);
 
-    List<Ad> findAdByAdId(long id);
+    Ad findAdByAdId(long id);
 
     void updateAd(Ad ad);
 }
