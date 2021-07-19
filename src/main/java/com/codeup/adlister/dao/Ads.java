@@ -17,4 +17,8 @@ public interface Ads {
 
     //  return list of ads based on a user search
     List<Ad> searchForAds(String searchForAd);
+
+    List<Ad> listAdsByCatId(long catId);
+
+    void deleteAdByAdId(long id);
 }
