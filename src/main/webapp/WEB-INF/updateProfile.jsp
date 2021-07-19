@@ -14,11 +14,11 @@
     <form action="/updateProfile" method="post">
         <div class="form-group">
             <label for="username">Username</label>
-            <input id="username" name="username" class="form-control" type="text" placeholder="${username}" value="${username}" readonly>
+            <input id="username" name="username" class="form-control" type="text" value="${usersInputUsername}" readonly>
         </div>
         <div class="form-group">
             <label for="email">Email${userEmailExistsHTML}</label>
-            <input id="email" name="email" class="form-control" type="text" placeholder="${userEmailExistsMessage}${invalidEmailMessage}">
+            <input id="email" name="email" class="form-control" type="text" placeholder="${userEmailExistsMessage}${invalidEmailMessage}" value="${usersInputEmail}" required>
         </div>
         <div class="form-group">
             <label for="password">Password${noPasswordMatchAlert}</label>

@@ -21,10 +21,16 @@ public class UpdateProfile extends HttpServlet {
             response.sendRedirect("/login");
             return;
         }
+        if (request.getSession().getAttribute("user") != null && request.getSession().getAttribute("allowEdit") == null) {
+            request.getSession().setAttribute("allowEdit", "yes");
+            request.getSession().removeAttribute("user");
+            request.getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
+            return;
+        }
 
         User loggedInUser = (User) request.getSession().getAttribute("user");
         String username = loggedInUser.getUsername();
-        request.setAttribute("username", username);
+        request.setAttribute("usersInputUsername", username);
         request.getRequestDispatcher("/WEB-INF/updateProfile.jsp")
                 .forward(request, response);
     }
@@ -33,42 +39,22 @@ public class UpdateProfile extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         User loggedInUser = (User) request.getSession().getAttribute("user");
-        String userName = request.getParameter("username");
+        String username = loggedInUser.getUsername();
+        request.setAttribute("usersInputUsername", username);
         String email = request.getParameter("email");
         String password = request.getParameter("password");
         String confirmPassword = request.getParameter("confirm_password");
-
-//        boolean isValidEmail = VerifyData.isValidEmail(email);
-//        boolean emailDoesNotExist = VerifyData.userEmailNotExist(email);
-//
-//        System.out.println(isValidEmail);
-//        System.out.println(emailDoesNotExist);
-//
-//        if(isValidEmail && emailDoesNotExist){
-//            System.out.println("this works");
-//            DaoFactory.getUsersDao().updateUser(email, userName);
-//        }
-//
-//        System.out.println(userName);
-//        System.out.println(email);
-
 
 
         boolean updatedProfileVerified = VerifyData.checkUserInputAndGenerateErrorMessages(
                 request, response, email, password, confirmPassword, "updateProfile");
 
         if (updatedProfileVerified){
-            System.out.println("works so far");
-            System.out.println(userName);
-            User user = new User(userName, email, password);
+            User user = new User(username, email, password);
             DaoFactory.getUsersDao().updateUser(user);
-            System.out.println(email);
-            System.out.println(password);
         }
-        PrintWriter out = response.getWriter();
-        out.println("<h1>Hello, World!</h1>");
+        request.getSession().removeAttribute("allowEdit");
         response.sendRedirect("/login");
-
     }
 }
 
