@@ -10,4 +10,6 @@ public interface Users {
     User findByUserEmail(String email);
 
     Long insert(User user);
+
+    User updateUser(User user);
 }
