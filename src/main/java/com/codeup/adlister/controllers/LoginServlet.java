@@ -35,6 +35,10 @@ public class LoginServlet extends HttpServlet {
 
         if (validAttempt) {
             request.getSession().setAttribute("user", user);
+            if (request.getSession().getAttribute("allowEdit") != null) {
+                response.sendRedirect("/updateProfile");
+                return;
+            }
             response.sendRedirect("/profile");
         } else {
             response.sendRedirect("/login");

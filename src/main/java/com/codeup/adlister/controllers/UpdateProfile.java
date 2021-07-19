@@ -21,10 +21,16 @@ public class UpdateProfile extends HttpServlet {
             response.sendRedirect("/login");
             return;
         }
+        if (request.getSession().getAttribute("user") != null && request.getSession().getAttribute("allowEdit") == null) {
+            request.getSession().setAttribute("allowEdit", "yes");
+            request.getSession().removeAttribute("user");
+            request.getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
+            return;
+        }
 
         User loggedInUser = (User) request.getSession().getAttribute("user");
         String username = loggedInUser.getUsername();
-        request.setAttribute("username", username);
+        request.setAttribute("usersInputUsername", username);
         request.getRequestDispatcher("/WEB-INF/updateProfile.jsp")
                 .forward(request, response);
     }
@@ -32,19 +38,23 @@ public class UpdateProfile extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        String userName = request.getParameter("username");
+        User loggedInUser = (User) request.getSession().getAttribute("user");
+        String username = loggedInUser.getUsername();
+        request.setAttribute("usersInputUsername", username);
         String email = request.getParameter("email");
         String password = request.getParameter("password");
         String confirmPassword = request.getParameter("confirm_password");
 
+
         boolean updatedProfileVerified = VerifyData.checkUserInputAndGenerateErrorMessages(
                 request, response, email, password, confirmPassword, "updateProfile");
 
-        if (updatedProfileVerified) {
-            User user = new User(userName, email, password);
+        if (updatedProfileVerified){
+            User user = new User(username, email, password);
             DaoFactory.getUsersDao().updateUser(user);
         }
-        response.sendRedirect("/logout");
+        request.getSession().removeAttribute("allowEdit");
+        response.sendRedirect("/login");
     }
 }
 
