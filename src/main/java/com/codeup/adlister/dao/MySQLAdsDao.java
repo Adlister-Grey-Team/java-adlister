@@ -1,6 +1,7 @@
 package com.codeup.adlister.dao;
 
 import com.codeup.adlister.models.Ad;
+import com.codeup.adlister.models.User;
 import com.mysql.cj.jdbc.Driver;
 
 import java.io.FileInputStream;
@@ -121,4 +122,37 @@ public class MySQLAdsDao implements Ads {
             throw new RuntimeException("Error deleting ad", e);
         }
     }
+
+    @Override
+    public List<Ad> findAdByAdId(long id) {
+        System.out.println(id);
+        String query = "SELECT * FROM ads WHERE id = ?";
+        try {
+            PreparedStatement stmt = connection.prepareStatement(query);
+            stmt.setLong(1, id);
+            ResultSet rs = stmt.executeQuery();
+            return createAdsFromResults(rs);
+        } catch (SQLException e) {
+            throw new RuntimeException("Error finding ad by id", e);
+        }
+    }
+
+    public void updateAd(Ad ad) {
+        String query = "UPDATE ads SET title = ?, description = ? WHERE id = ?";
+        try {
+            PreparedStatement stmt = connection.prepareStatement(query);
+            stmt.setString(1, ad.getTitle());
+            stmt.setString(2, ad.getDescription());
+            stmt.setLong(3, ad.getId());
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException("Error finding a user by user email", e);
+        }
+    }
+
+//    public static void main(String[] args) {
+//        Ad ad1 = new Ad(22, "asdflk", "alskjdsfa");
+//        DaoFactory.getAdsDao().updateAd(ad1);
+//    }
+
 }
