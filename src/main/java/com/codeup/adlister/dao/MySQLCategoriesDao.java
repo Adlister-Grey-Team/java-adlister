@@ -80,18 +80,21 @@ public class MySQLCategoriesDao implements Categories {
         return cats;
     }
 
+// not working: objects returned do not have correct data types
+//    public List<Category> adCategoriesPerAd(long ad_id) {
+//        List<Category> cats = new ArrayList<>();
+//        String query = "SELECT id FROM categories WHERE id IN (SELECT cat_id FROM ad_cat WHERE ad_id = ?)";
+//        try {
+//            PreparedStatement stmt = conn.prepareStatement(query);
+//            stmt.setLong(1, ad_id);
+//            ResultSet rs = stmt.executeQuery();
+//            return createCatsFromResults(rs);
+//        } catch (SQLException e) {
+//            throw new RuntimeException("Error finding categories for a single ad", e);
+//        }
+//    }
 
-    public List<Category> adCategoriesPerAd(long ad_id) {
-        String query = "SELECT category FROM categories WHERE id IN (SELECT cat_id FROM ad_cat WHERE ad_id = ?)";
-        try {
-            PreparedStatement stmt = conn.prepareStatement(query);
-            stmt.setLong(1, ad_id);
-            ResultSet rs = stmt.executeQuery();
-            return createCatsFromResults(rs);
-        } catch (SQLException e) {
-            throw new RuntimeException("Error finding categories for a single ad", e);
-        }
-    }
+
 }
 
 

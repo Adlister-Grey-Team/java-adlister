@@ -21,4 +21,8 @@ public interface Ads {
     List<Ad> listAdsByCatId(long catId);
 
     void deleteAdByAdId(long id);
+
+    List<Ad> findAdByAdId(long id);
+
+    void updateAd(Ad ad);
 }
