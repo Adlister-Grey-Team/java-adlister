@@ -151,7 +151,10 @@ public class MySQLAdsDao implements Ads {
     }
 
 //    public static void main(String[] args) {
-//        Ad ad1 = new Ad(22, "asdflk", "alskjdsfa");
+//        Ad ad1 = new Ad( 16,1, "does it work tho","asdfsdffjdsfa");
+//        System.out.println(ad1.getTitle());
+//        System.out.println(ad1.getDescription());
+//        System.out.println(ad1.getId());
 //        DaoFactory.getAdsDao().updateAd(ad1);
 //    }
 

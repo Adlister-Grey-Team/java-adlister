@@ -17,11 +17,11 @@ import static java.lang.Long.parseLong;
 @WebServlet("/updateAd")
 public class UpdateAdServlet extends HttpServlet {
 
-    long adId;
+    private long adId;
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 //        "updateAd" gets ads id on button click
-         adId = Long.parseLong(req.getParameter("updateAd"));
+        adId = Long.parseLong(req.getParameter("updateAd"));
         req.setAttribute("selectedAd", DaoFactory.getAdsDao().findAdByAdId(adId));
 //        req.setAttribute("cats", DaoFactory.getCatDao().adCategoriesPerAd(adId));
         req.getRequestDispatcher("/WEB-INF/ads/updateAd.jsp").forward(req, resp);
@@ -34,9 +34,10 @@ public class UpdateAdServlet extends HttpServlet {
 //        Category category = new Category();
 //        String[] cats = request.getParameterValues("checkbox");
 
-//        User user = (User) request.getSession().getAttribute("user");
+        User user = (User) request.getSession().getAttribute("user");
         Ad ad = new Ad(
                 adId,
+                user.getId(),
                 request.getParameter("title"),
                 request.getParameter("description")
         );
