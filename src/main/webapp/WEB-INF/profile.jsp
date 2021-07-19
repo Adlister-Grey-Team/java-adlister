@@ -21,7 +21,9 @@
                 <p>${ad.description}</p>
                 <form action="/profile" method="post">
                     <button type="submit" name="deleteAd" value="${ad.id}">Delete</button>
-                    <button type="submit" name="deleteUpdate" value="update">Update</button>
+                </form>
+                <form action="/updateAd" method="get">
+                    <button type="submit" name="updateAd" value="${ad.id}">Update</button>
                 </form>
             </div>
         </c:forEach>
