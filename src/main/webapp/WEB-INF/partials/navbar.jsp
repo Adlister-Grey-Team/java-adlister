@@ -19,10 +19,10 @@
                 <input type="text" id="search" name="search">
                 <input type="submit" value="Search Ads">
             </form>
-            <form action="#" method="post">
+            <form action="/category" method="post">
                 <label for="selector">Categories</label>
                 <select name="category" id="selector">
-                    <option value="0">--Choose Category--</option>
+                    <option value="15" selected>--Choose Category--</option>
                     <option value="1">Automotive</option>
                     <option value="2">Beauty and Health</option>
                     <option value="3">Books</option>

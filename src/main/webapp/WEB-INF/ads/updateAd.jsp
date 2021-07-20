@@ -9,15 +9,14 @@
 <body>
 <div class="container">
     <h1>Update your Ad</h1>
-<c:forEach var="ad" items="${selectedAd}">
     <form action="/updateAd" method="post">
         <div class="form-group">
             <label for="title">Title</label>
-            <input id="title" name="title" class="form-control" type="text" value="${ad.title}">
+            <input id="title" name="title" class="form-control" type="text" value="${selectedAd.title}">
         </div>
         <div class="form-group">
             <label for="description">Description</label>
-            <textarea id="description" name="description" class="form-control" type="text" placeholder="${ad.description}">${ad.description}</textarea>
+            <textarea id="description" name="description" class="form-control" type="text" placeholder="${selectedAd.description}">${selectedAd.description}</textarea>
         </div>
         <div class="form-group">
             <label>Categories</label><br>
@@ -46,7 +45,6 @@
         </div>
         <input type="submit" class="btn btn-block btn-primary">
     </form>
-</c:forEach>
 </div>
 </body>
 </html>
