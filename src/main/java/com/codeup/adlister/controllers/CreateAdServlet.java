@@ -30,7 +30,7 @@ public class CreateAdServlet extends HttpServlet {
                 .forward(request, response);
     }
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         Category category = new Category();
         String[] cats = request.getParameterValues("checkbox");
         User user = (User) request.getSession().getAttribute("user");
@@ -39,13 +39,19 @@ public class CreateAdServlet extends HttpServlet {
                 request.getParameter("title"),
                 request.getParameter("description")
         );
+        if (cats == null) {
+            request.setAttribute("selectCategoryAlert", "<span style=color:red>*</span> Please select a category!");
+            request.getRequestDispatcher("/WEB-INF/ads/create.jsp")
+                    .forward(request, response);
+            return;
+        }
         Long adID = DaoFactory.getAdsDao().insert(ad);
-        response.sendRedirect("/ads");
         for (String cat : cats) {
             Long newCat = parseLong(cat);
             category.setAd_id(adID);
             category.setCat_id(newCat);
             DaoFactory.getCatDao().insert(adID, newCat);
         }
+        response.sendRedirect("/ads");
     }
 }
